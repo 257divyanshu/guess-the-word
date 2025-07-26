@@ -1,10 +1,16 @@
 import './App.css'
+import Button from './components/Button/Button'
 
 function App() {
   return (
     <>
       <div>
-        Welcome to GUESS THE WORD game!
+        <Button
+          btnText='click'
+          btnType='btn'
+          btnOnClick={()=>{console.log("button clicked")}}
+          btnStyle='primary'
+        />
       </div>
     </>
   )
