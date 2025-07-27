@@ -8,6 +8,8 @@ function TextInputForm() {
 
     let [value, setValue] = useState('');
 
+    let [textInputType, setTextInputType] = useState('password');
+
     function handleFormSubmit(e){
         e.preventDefault();
     }
@@ -23,10 +25,21 @@ function TextInputForm() {
             <div className="mr-2 flex-1">
                 <TextInput
                     inputLabel="Enter a word"
-                    inputType="password"
+                    inputType={textInputType}
                     inputOnChange={handleTextInputChange}
                     inputValue={value}
                 />
+            </div>
+
+            <div className="flex">
+                <Button
+                    btnText={textInputType=="password" ? "Show" : "Hide"}
+                    btnOnClick={()=>{
+                        setTextInputType(textInputType=="password" ? "text" : "password")
+                    }}
+                    btnType="button"
+                >
+                </Button>
             </div>
 
             <div className="flex">
