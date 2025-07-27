@@ -1,14 +1,16 @@
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import TextInputFormContainer from './components/TextInputForm/TextInputFormContainer'
+import PlayGame from './pages/PlayGame/PlayGame'
+import StartGame from './pages/StartGame/StartGame'
 
 function App() {
   return (
     <>
-      <div>
-        <TextInputFormContainer onFormSubmit={(v)=>{
-          console.log(`form submitted with value ${v}`)
-          }}/>
-      </div>
+      <Routes>
+        <Route path='/play' element={<PlayGame/>}/>  
+        <Route path='/start' element={<StartGame/>}/>  
+        <Route path='*' element={<div>not found</div>}/>
+      </Routes>      
     </>
   )
 }
