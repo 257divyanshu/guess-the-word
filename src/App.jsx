@@ -1,15 +1,16 @@
 import './App.css'
 import Button from './components/Button/Button'
+import TextInput from './components/TextInput/TextInput'
 
 function App() {
   return (
     <>
       <div>
-        <Button
-          btnText='click'
-          btnType='btn'
-          btnOnClick={()=>{console.log("button clicked")}}
-          btnStyle='primary'
+        <TextInput
+          inputLabel={'enter a word'}
+          inputType={'text'}
+          // inputValue={'abcd'}
+          inputOnChange={()=>{console.log("input changed")}}
         />
       </div>
     </>
