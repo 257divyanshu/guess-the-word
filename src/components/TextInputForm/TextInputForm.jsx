@@ -1,23 +1,9 @@
 import TextInput from "../TextInput/TextInput";
 import Button from "../Button/Button";
-import { useState } from "react";
 
-function TextInputForm() {
+function TextInputForm({handleFormSubmit, textInputType, handleTextInputChange, value, setTextInputType}) {
 
     // console.log("TextInputForm component re-rendered")
-
-    let [value, setValue] = useState('');
-
-    let [textInputType, setTextInputType] = useState('password');
-
-    function handleFormSubmit(e){
-        e.preventDefault();
-    }
-
-    function handleTextInputChange(e){
-        // console.log(e.target.value);
-        setValue(e.target.value);
-    }
 
     return (
         <form className="flex" onSubmit={handleFormSubmit}>
