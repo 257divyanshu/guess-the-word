@@ -1,7 +1,7 @@
 import getAllCharacters from "./maskedTextUtility";
 
-function MaskedText({word, guessedLetters}){
-    const letters = getAllCharacters(word, guessedLetters);
+function MaskedText({word, usedLetters}){
+    const letters = getAllCharacters(word, usedLetters);
     return (
         <>
             {letters.map((letter,index)=>{

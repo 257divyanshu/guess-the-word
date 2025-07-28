@@ -1,15 +1,14 @@
 import { Link } from "react-router-dom";
 import MaskedText from "../../components/MaskedText/MaskedText";
+import LetterButtons from "../../components/LetterButtons/LetterButtons";
 
 function PlayGame(){
     return (
         <>
             <div>Play Game page</div>
-            <MaskedText
+            <LetterButtons
                 word={'developer'}
-                guessedLetters={['d','e','p']}
             />
-            <Link to={'/start'}>Go to StartGame page</Link>
         </>
     )
 }

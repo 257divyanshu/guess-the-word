@@ -1,8 +1,8 @@
-function getAllCharacters(word, guessedLetters){
-    guessedLetters = guessedLetters.map((letter)=>letter.toUpperCase());
-    const correctlyGuessedLetters = new Set(guessedLetters);
+function getAllCharacters(word, usedLetters){
+    usedLetters = usedLetters.map((letter)=>letter.toUpperCase());
+    const guessedLetters = new Set(usedLetters);
     const maskedText = word.toUpperCase().split('').map((char)=>{
-        if(correctlyGuessedLetters.has(char)){
+        if(guessedLetters.has(char)){
             return char;
         }
         else{
