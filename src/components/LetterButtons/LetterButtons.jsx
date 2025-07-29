@@ -1,10 +1,6 @@
-import { useState } from "react";
-
 const ALPHABETS = new Array(26).fill(undefined).map((elem, index) => String.fromCharCode(65 + index));
 
-function LetterButtons({word}){
-
-    let [usedLetters, setUsedLetters] = useState([]);
+function LetterButtons({word, usedLetters, onLetterClick}){
 
     const originalCharacters = new Set(word.toUpperCase().split(''));
 
@@ -23,9 +19,7 @@ function LetterButtons({word}){
     };
 
     function handleClick(e){
-        // onLetterClick?.(e.target.value);
-        setUsedLetters([...usedLetters,e.target.value]);
-        console.log(usedLetters);
+        onLetterClick?.(e.target.value);
     }
 
     const buttons = ALPHABETS.map((letter) => {

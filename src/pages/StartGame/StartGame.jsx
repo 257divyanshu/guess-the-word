@@ -5,15 +5,14 @@ function StartGame(){
 
     const navigate = useNavigate();
 
-    function handleSubmission(){
-        navigate('/play');
+    function handleSubmission(value){
+        navigate('/play', {state : {wordSelected: value}});
     }
 
     return (
         <>
             <div>Start Game page</div>
             <TextInputFormContainer onFormSubmit={handleSubmission}/>
-            {/* <Link to={'/play'}>Go to P  layGame page</Link> */}
         </>
     )
 }
