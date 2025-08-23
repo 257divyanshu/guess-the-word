@@ -11,7 +11,11 @@ function StartGame(){
     const navigate = useNavigate();
 
     function handleSubmission(value){
-        navigate('/play', {state : {wordSelected: value}});
+        navigate('/play', {state : {
+            wordSelected: value,
+            wordLength: wordLength
+        
+        }});
     }
 
     function handleWordLengthSubmission(wordLength){
