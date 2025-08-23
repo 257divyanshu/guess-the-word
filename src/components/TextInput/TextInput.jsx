@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { GameContext } from "../../context/GameContext";
+
 function TextInput({inputLabel, inputType="text", inputValue, inputOnChange}){
+    const {wordLength} = useContext(GameContext);
+
     return (
         <label>
             {inputLabel && <span>{inputLabel}</span>}
@@ -8,6 +13,7 @@ function TextInput({inputLabel, inputType="text", inputValue, inputOnChange}){
                 placeholder={inputLabel}
                 type={inputType}
                 value={inputValue}
+                maxLength={wordLength}
             />
         </label>
     )
