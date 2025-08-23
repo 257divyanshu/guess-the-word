@@ -1,7 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import TextInputFormContainer from "../../components/TextInputForm/TextInputFormContainer";
+import { useState } from "react";
+import SelectWordLength from "../../components/SelectWordLength/SelectWordLength";
 
 function StartGame(){
+
+    const [wordLength, setWordLength] = useState();
 
     const navigate = useNavigate();
 
@@ -9,10 +13,14 @@ function StartGame(){
         navigate('/play', {state : {wordSelected: value}});
     }
 
+    function handleWordLengthSubmission(wordLength){
+        setWordLength(wordLength);
+    }
+
     return (
         <>
-            <div>Start Game page</div>
-            <TextInputFormContainer onFormSubmit={handleSubmission}/>
+            {!wordLength && <SelectWordLength onWordLengthSubmit={handleWordLengthSubmission}/>}
+            {wordLength && <TextInputFormContainer onFormSubmit={handleSubmission}/>}
         </>
     )
 }
