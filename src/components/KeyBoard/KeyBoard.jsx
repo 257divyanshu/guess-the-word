@@ -17,7 +17,7 @@ const BackspaceIcon = () => (
 );
 
 
-function KeyBoard() {
+function KeyBoard({onKeyPress}) {
     // the layout of the keyboard
     const row1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
     const row2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
@@ -35,6 +35,9 @@ function KeyBoard() {
           ${isSpecialKey ? 'bg-slate-400 hover:bg-slate-500' : 'bg-gray-200 hover:bg-gray-300'}
           text-black text-lg transition-all
         `}
+                onClick={(e) => {
+                    onKeyPress(e.target.innerText || "BACKSPACE")
+                }}
             >
                 {key === "BACKSPACE" ? <BackspaceIcon /> : key}
             </button>

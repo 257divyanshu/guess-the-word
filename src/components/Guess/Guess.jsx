@@ -19,7 +19,7 @@ function Guess({ letters = [], wordLength = 5 }) { // Default to 5 for safety
   // Create an array with a fixed length, filled with the provided letters
   const displayLetters = new Array(wordLength)
     .fill(null)
-    .map((_, index) => letters[index].toUpperCase() || null);
+    .map((_, index) => letters[index]?.toUpperCase() || null);
 
   return (
     <div className="flex justify-center my-1">
