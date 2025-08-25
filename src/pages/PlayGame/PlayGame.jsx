@@ -16,6 +16,9 @@ function PlayGame() {
   const [submittedGuesses, setSubmittedGuesses] = useState([]);
 
   let [blackChars, setBlackChars] = useState('');
+
+  const [guessGrid, setGuessGrid] = useState([false,false, false, false, false]);
+  const [guessNo, setGuessNo] = useState(0);
   
   function handleKeyPress(key) {
     if (key === "ENTER") {
@@ -30,6 +33,10 @@ function PlayGame() {
           };
         };
         setBlackChars(blackChars+blackCharsToAdd);
+        let newGuessGrid = [...guessGrid];
+        newGuessGrid[guessNo] = true;
+        setGuessGrid(newGuessGrid);
+        setGuessNo(guessNo+1);
       }
       return; // Stop further execution
     }
@@ -47,12 +54,12 @@ function PlayGame() {
   }
 
   // Create an array for all 6 guess rows
-  const guessGrid = Array(6).fill(null);
+  // const guessGrid = Array(6).fill(null);
 
   return (
     <>
       {/* Map over the grid to create each guess row */}
-      {guessGrid.map((_, index) => {
+      {guessGrid.map((elem, index) => {
         const isCurrentRow = index === submittedGuesses.length;
         return (
           <Guess
@@ -60,6 +67,8 @@ function PlayGame() {
             // If it's the current row, show the live typing. Otherwise, show a submitted guess.
             letters={isCurrentRow ? currentGuess.split('') : (submittedGuesses[index] || '').split('')}
             wordLength={wordLength}
+            filled={elem}
+            blackChars={blackChars}
           />
         );
       })}

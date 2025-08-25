@@ -1,12 +1,12 @@
 // A single styled letter box
-function Letter({ value }) {
+function Letter({ value, isBlackChar }) {
   return (
     <div
-      className="
+      className={`
         h-12 w-12 mx-[3px] my-[0px] flex items-center justify-center 
-        bg-slate-600 rounded-md shadow-md
+        ${isBlackChar ? 'bg-black' : 'bg-slate-600'} rounded-md shadow-md
         text-white text-2xl font-bold
-      "
+  `}
     >
       {/* Render a non-breaking space if the value is empty to maintain height */}
       {value || '\u00A0'}
@@ -15,7 +15,7 @@ function Letter({ value }) {
 }
 
 // The main component to display a row of letters
-function Guess({ letters = [], wordLength = 5 }) { // Default to 5 for safety
+function Guess({ letters = [], wordLength = 5, filled, blackChars }) { // Default to 5 for safety
   // Create an array with a fixed length, filled with the provided letters
   const displayLetters = new Array(wordLength)
     .fill(null)
@@ -24,7 +24,7 @@ function Guess({ letters = [], wordLength = 5 }) { // Default to 5 for safety
   return (
     <div className="flex justify-center my-1">
       {displayLetters.map((letter, index) => (
-        <Letter key={index} value={letter} />
+        <Letter key={index} value={letter} isBlackChar={filled && blackChars.includes(letter)} />
       ))}
     </div>
   );
