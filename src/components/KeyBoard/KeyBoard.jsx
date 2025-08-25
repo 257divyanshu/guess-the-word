@@ -17,7 +17,7 @@ const BackspaceIcon = () => (
 );
 
 
-function KeyBoard({onKeyPress}) {
+function KeyBoard({onKeyPress, blackChars}) {
     // the layout of the keyboard
     const row1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
     const row2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
@@ -26,14 +26,13 @@ function KeyBoard({onKeyPress}) {
     const renderKey = (key) => {
         const isSpecialKey = key === "ENTER" || key === "BACKSPACE";
         const keyWidth = isSpecialKey ? 'w-20' : 'w-10'; // special keys wider
+        const isBlackChar = blackChars.includes(key);
 
         return (
             <button
                 key={key}
                 className={`
-          ${keyWidth} h-14 m-1 flex items-center justify-center rounded-md font-bold
-          ${isSpecialKey ? 'bg-slate-400 hover:bg-slate-500' : 'bg-gray-200 hover:bg-gray-300'}
-          text-black text-lg transition-all
+          ${keyWidth} h-14 m-1 flex items-center justify-center rounded-md font-bold ${isSpecialKey ? 'bg-slate-400 hover:bg-slate-500 text-black' : isBlackChar ? 'bg-black text-white' : 'bg-gray-200 hover:bg-gray-300 text-black'} text-lg transition-all
         `}
                 onClick={(e) => {
                     onKeyPress(e.target.innerText || "BACKSPACE")

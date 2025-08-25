@@ -6,12 +6,16 @@ import { useState } from "react";
 function PlayGame() {
   const location = useLocation();
   const wordLength = location.state?.wordLength || 5;
+  let wordSelected = location.state?.wordSelected;
+  wordSelected = wordSelected.toUpperCase();
   
   // State for the current, active guess being typed
   const [currentGuess, setCurrentGuess] = useState('');
 
   // State to store all submitted guesses (e.g., ['HELLO', 'WORLD'])
   const [submittedGuesses, setSubmittedGuesses] = useState([]);
+
+  let [blackChars, setBlackChars] = useState('');
   
   function handleKeyPress(key) {
     if (key === "ENTER") {
@@ -19,6 +23,13 @@ function PlayGame() {
       if (currentGuess.length === wordLength) {
         setSubmittedGuesses([...submittedGuesses, currentGuess]); // Add the guess to our list
         setCurrentGuess(''); // Clear the current guess for the next line
+        let blackCharsToAdd = '';
+        for(let i = 0; i<wordLength; i++){
+          if(!wordSelected.includes(currentGuess[i])){
+            blackCharsToAdd+=currentGuess[i];
+          };
+        };
+        setBlackChars(blackChars+blackCharsToAdd);
       }
       return; // Stop further execution
     }
@@ -53,7 +64,7 @@ function PlayGame() {
         );
       })}
 
-      <KeyBoard onKeyPress={handleKeyPress} />
+      <KeyBoard onKeyPress={handleKeyPress} blackChars={blackChars}/>
     </>
   );
 }
