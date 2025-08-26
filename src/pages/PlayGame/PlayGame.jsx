@@ -1,13 +1,16 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Guess from "../../components/Guess/Guess";
 import KeyBoard from "../../components/KeyBoard/KeyBoard";
 import { useState } from "react";
+import WinModal from "../../components/WinModal/WinModal";
 
 function PlayGame() {
   const location = useLocation();
   const wordLength = location.state?.wordLength || 5;
   let wordSelected = location.state?.wordSelected;
   wordSelected = wordSelected.toUpperCase();
+
+  const navigate = useNavigate(); // 3. Initialize navigate
 
   // State for the current, active guess being typed
   const [currentGuess, setCurrentGuess] = useState('');
@@ -22,6 +25,10 @@ function PlayGame() {
 
   const [win, setWin] = useState(false);
 
+  function handleRestart() {
+    navigate('/start');
+  }
+
   function handleKeyPress(key) {
     if (win) return;
     if (key === "ENTER") {
@@ -29,9 +36,9 @@ function PlayGame() {
       newGuessGrid[guessNo] = true;
       setGuessGrid(newGuessGrid);
       if (currentGuess === wordSelected) {
-        console.log('you have won the game');
-        setWin(true);
-        return;
+        setTimeout(() => {
+          setWin(true);
+        }, 1000);
       }
       // Only submit if the word is the correct length
       if (currentGuess.length === wordLength) {
@@ -67,21 +74,25 @@ function PlayGame() {
   return (
     <>
       {/* Map over the grid to create each guess row */}
-      {guessGrid.map((elem, index) => {
-        const isCurrentRow = index === submittedGuesses.length;
-        return (
-          <Guess
-            key={index}
-            // If it's the current row, show the live typing. Otherwise, show a submitted guess.
-            letters={isCurrentRow ? currentGuess.split('') : (submittedGuesses[index] || '').split('')}
-            wordLength={wordLength}
-            filled={elem}
-            blackChars={blackChars}
-          />
-        );
-      })}
-
-      <KeyBoard onKeyPress={handleKeyPress} blackChars={blackChars} />
+      <div className={`transition-all duration-300 ${win ? 'blur-[2px]' : ''}`}>
+        <div className="flex flex-col items-center">
+          {guessGrid.map((elem, index) => {
+            const isCurrentRow = index === submittedGuesses.length;
+            return (
+              <Guess
+                key={index}
+                // If it's the current row, show the live typing. Otherwise, show a submitted guess.
+                letters={isCurrentRow ? currentGuess.split('') : (submittedGuesses[index] || '').split('')}
+                wordLength={wordLength}
+                filled={elem}
+                blackChars={blackChars}
+              />
+            );
+          })}
+        </div>
+        <KeyBoard onKeyPress={handleKeyPress} blackChars={blackChars} />
+      </div>
+      {win && <WinModal onRestart={handleRestart} />}
     </>
   );
 }
