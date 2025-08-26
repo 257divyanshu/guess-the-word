@@ -9,7 +9,7 @@ function TextInputFormContainer({onFormSubmit}) {
 
     function handleFormSubmit(e) {
         e.preventDefault();
-        onFormSubmit?.(value);
+        onFormSubmit?.(value.toUpperCase());
     }
 
     function handleTextInputChange(e) {
