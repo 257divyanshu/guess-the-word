@@ -3,6 +3,7 @@ import Guess from "../../components/Guess/Guess";
 import KeyBoard from "../../components/KeyBoard/KeyBoard";
 import { useState } from "react";
 import WinModal from "../../components/WinModal/WinModal";
+import LossModal from "../../components/LossModal/LossModal";
 
 function PlayGame() {
   const location = useLocation();
@@ -24,6 +25,7 @@ function PlayGame() {
   const [guessNo, setGuessNo] = useState(0);
 
   const [win, setWin] = useState(false);
+  const [loss, setLoss] = useState(false);
 
   function handleRestart() {
     navigate('/start');
@@ -36,6 +38,8 @@ function PlayGame() {
     if (key === "ENTER") {
       // Only submit if the word is the correct length
       if (currentGuess.length === wordLength) {
+        console.log(guessGrid);
+        console.log(guessNo);
         setSubmittedGuesses([...submittedGuesses, currentGuess]); // Add the guess to our list
         setCurrentGuess(''); // Clear the current guess for the next line
         let blackCharsToAdd = '';
@@ -52,6 +56,11 @@ function PlayGame() {
         if (currentGuess === wordSelected) {
           setTimeout(() => {
             setWin(true);
+          }, 1000);
+        }
+        else if (guessNo==4){
+          setTimeout(() => {
+            setLoss(true);
           }, 1000);
         }
       }
@@ -95,6 +104,7 @@ function PlayGame() {
         <KeyBoard onKeyPress={handleKeyPress} blackChars={blackChars} />
       </div>
       {win && <WinModal onRestart={handleRestart} word={wordSelected} />}
+      {loss && <LossModal onRestart={handleRestart} word={wordSelected} />}
     </>
   );
 }
