@@ -30,16 +30,10 @@ function PlayGame() {
   }
 
   function handleKeyPress(key) {
+
     if (win) return;
+
     if (key === "ENTER") {
-      let newGuessGrid = [...guessGrid];
-      newGuessGrid[guessNo] = true;
-      setGuessGrid(newGuessGrid);
-      if (currentGuess === wordSelected) {
-        setTimeout(() => {
-          setWin(true);
-        }, 1000);
-      }
       // Only submit if the word is the correct length
       if (currentGuess.length === wordLength) {
         setSubmittedGuesses([...submittedGuesses, currentGuess]); // Add the guess to our list
@@ -52,6 +46,14 @@ function PlayGame() {
         };
         setBlackChars(blackChars + blackCharsToAdd);
         setGuessNo(guessNo + 1);
+        let newGuessGrid = [...guessGrid];
+        newGuessGrid[guessNo] = true;
+        setGuessGrid(newGuessGrid);
+        if (currentGuess === wordSelected) {
+          setTimeout(() => {
+            setWin(true);
+          }, 1000);
+        }
       }
       return; // Stop further execution
     }
