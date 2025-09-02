@@ -94,7 +94,7 @@ function PlayGame() {
         </div>
         <KeyBoard onKeyPress={handleKeyPress} blackChars={blackChars} />
       </div>
-      {win && <WinModal onRestart={handleRestart} />}
+      {win && <WinModal onRestart={handleRestart} word={wordSelected} />}
     </>
   );
 }
