@@ -3,8 +3,8 @@ function Button({ btnText, btnType, btnOnClick, btnColor='blue'}) {
         setTimeout(btnOnClick, 400);
     };
     const colorStyles = {
-    blue: 'bg-blue-500 hover:bg-blue-600',
-    green: 'bg-green-500 hover:bg-green-600',
+    blue: 'bg-blue-500 lg:hover:bg-blue-600',
+    green: 'bg-green-500 lg:hover:bg-green-600',
   };
     return (
         <button

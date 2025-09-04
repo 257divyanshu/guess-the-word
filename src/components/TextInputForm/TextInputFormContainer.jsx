@@ -14,7 +14,7 @@ function TextInputFormContainer({onFormSubmit}) {
 
     function handleTextInputChange(e) {
         // console.log(e.target.value);
-        setValue(e.target.value);
+        setValue(e.target.value.toUpperCase());
     }
 
     return (
