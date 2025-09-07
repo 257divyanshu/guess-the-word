@@ -32,7 +32,7 @@ function KeyBoard({onKeyPress, blackChars}) {
             <button
                 key={key}
                 className={`
-          ${keyWidth} h-14 m-1 flex items-center justify-center rounded-md font-bold ${isSpecialKey ? 'bg-slate-400 hover:bg-slate-500 text-black' : isBlackChar ? 'bg-black text-white' : 'bg-gray-200 hover:bg-gray-300 text-black'} text-lg transition-all
+          ${keyWidth} h-12 m-1 flex items-center justify-center rounded-md font-bold text-lg ${isSpecialKey ? 'bg-slate-400 hover:bg-slate-500 text-black text-[0.9rem]' : isBlackChar ? 'bg-black text-white' : 'bg-gray-200 hover:bg-gray-300 text-black'} transition-all
         `}
                 onClick={(e) => {
                     onKeyPress(e.target.innerText || "BACKSPACE")
@@ -45,7 +45,7 @@ function KeyBoard({onKeyPress, blackChars}) {
 
     return (
         // Main keyboard container
-        <div className="bg-slate-700 p-4 rounded-xl shadow-lg">
+        <div className="bg-slate-700 p-[7px] rounded-xl m-1 mt-6">
             {/* First Row */}
             <div className="flex justify-center">
                 {row1.map(key => renderKey(key))}
