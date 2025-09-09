@@ -88,17 +88,22 @@ function PlayGame() {
   return (
     <>
 
-      <header className="flex items-center justify-between p-4">
+      <header className="flex justify-end p-4">
         <button
           onClick={() => setShowHelp(true)}
-          className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded"
+          className="bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-2 px-2 rounded flex items-center"
         >
-          How to Play
+          <img
+            src="/info.svg"
+            alt="Info icon"
+            className=" w-5 h-5" // Set a size for your icon
+          />
+          <span className=" ml-2">How to Play</span>
         </button>
       </header>
 
       {/* Map over the grid to create each guess row */}
-      <div className={` transition-all duration-300 ${win || loss || showHelp ? 'blur-[2px]' : ''} m-1 mt-8`}>
+      <div className={`transition-all duration-300 ${win || loss || showHelp ? 'blur-[2px]' : ''} m-1`}>
         <div className=" m-2 mb-6 flex flex-col items-center">
           {guessGrid.map((elem, index) => {
             const isCurrentRow = index === submittedGuesses.length;
