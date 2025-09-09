@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.scrollbar-visible::-webkit-scrollbar {
+  width: 10px; /* Set the width of the scrollbar */
+}
+
+.scrollbar-visible::-webkit-scrollbar-track {
+  background: #e5e7eb; /* A light gray color for the track */
+}
+
+.scrollbar-visible::-webkit-scrollbar-thumb {
+  background-color: #9ca3af; /* A darker gray for the thumb */
+  border-radius: 6px; /* Rounded corners for the thumb */
+  border: 2px solid #e5e7eb; /* Padding around the thumb */
+}

@@ -4,6 +4,7 @@ import KeyBoard from "../../components/KeyBoard/KeyBoard";
 import { useState } from "react";
 import WinModal from "../../components/WinModal/WinModal";
 import LossModal from "../../components/LossModal/LossModal";
+import HowToPlayModal from "../../components/HowToPlay/HowToPlay";
 
 function PlayGame() {
   const location = useLocation();
@@ -26,6 +27,8 @@ function PlayGame() {
 
   const [win, setWin] = useState(false);
   const [loss, setLoss] = useState(false);
+
+  const [showHelp, setShowHelp] = useState(false); // 2. Add state for the help modal
 
   function handleRestart() {
     navigate('/start');
@@ -58,7 +61,7 @@ function PlayGame() {
             setWin(true);
           }, 1000);
         }
-        else if (guessNo==4){
+        else if (guessNo == 4) {
           setTimeout(() => {
             setLoss(true);
           }, 1000);
@@ -84,8 +87,18 @@ function PlayGame() {
 
   return (
     <>
+
+      <header className="flex items-center justify-between p-4">
+        <button
+          onClick={() => setShowHelp(true)}
+          className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded"
+        >
+          How to Play
+        </button>
+      </header>
+
       {/* Map over the grid to create each guess row */}
-      <div className={` transition-all duration-300 ${win||loss ? 'blur-[2px]' : ''} m-1 mt-8`}>
+      <div className={` transition-all duration-300 ${win || loss || showHelp ? 'blur-[2px]' : ''} m-1 mt-8`}>
         <div className=" m-2 mb-6 flex flex-col items-center">
           {guessGrid.map((elem, index) => {
             const isCurrentRow = index === submittedGuesses.length;
@@ -105,6 +118,7 @@ function PlayGame() {
       </div>
       {win && <WinModal onRestart={handleRestart} word={wordSelected} />}
       {loss && <LossModal onRestart={handleRestart} word={wordSelected} />}
+      {showHelp && <HowToPlayModal onClose={() => setShowHelp(false)} />}
     </>
   );
 }
