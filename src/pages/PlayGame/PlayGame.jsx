@@ -85,7 +85,7 @@ function PlayGame() {
   return (
     <>
       {/* Map over the grid to create each guess row */}
-      <div className={` transition-all duration-300 ${win ? 'blur-[2px]' : ''} m-1 mt-8`}>
+      <div className={` transition-all duration-300 ${win||loss ? 'blur-[2px]' : ''} m-1 mt-8`}>
         <div className=" m-2 mb-6 flex flex-col items-center">
           {guessGrid.map((elem, index) => {
             const isCurrentRow = index === submittedGuesses.length;
