@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TextInputForm from "./TextInputForm";
 
-function TextInputFormContainer({onFormSubmit}) {
+function TextInputFormContainer({onFormSubmit, wordLength}) {
 
     let [value, setValue] = useState('');
 
@@ -9,7 +9,9 @@ function TextInputFormContainer({onFormSubmit}) {
 
     function handleFormSubmit(e) {
         e.preventDefault();
-        onFormSubmit?.(value.toUpperCase());
+        if(value.length===wordLength){
+            onFormSubmit?.(value.toUpperCase());
+        }
     }
 
     function handleTextInputChange(e) {
