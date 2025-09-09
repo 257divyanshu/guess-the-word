@@ -4,10 +4,10 @@ function SelectWordLength({ onWordLengthSubmit }) {
     return (
 
         // the container div
-        <div className="border-4 border-blue-500 mt-10 mx-auto flex flex-col gap-y-8 py-6 px-4 rounded-lg w-4/5 md:w-1/2 lg:w-1/3 bg-sky-100">
+        <div className="border-4 border-blue-500 mx-auto flex flex-col gap-y-8 py-6 px-4 rounded-lg w-4/5 md:w-1/2 lg:w-1/3 bg-sky-100">
 
             {/* first child containing text  */}
-            <div className="text-2xl font-bold text-center">Choose the word length</div>
+            <div className="text-2xl font-bold text-center text-blue-500">Choose the word length</div>
 
             {/* second child containing the buttons */}
             <div className="flex justify-center">

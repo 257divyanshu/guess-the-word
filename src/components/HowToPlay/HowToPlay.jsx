@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { GameContext } from "../../context/GameContext";
+
 // A small, styled letter box for the examples
 const ExampleLetter = ({ letter, color }) => {
   const colorClasses = {
@@ -13,6 +16,8 @@ const ExampleLetter = ({ letter, color }) => {
 };
 
 function HowToPlayModal({ onClose }) {
+      const { wordLength } = useContext(GameContext)
+  
   return (
     // Backdrop
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
@@ -24,7 +29,7 @@ function HowToPlayModal({ onClose }) {
         <h2 className="text-2xl font-bold mb-4 text-center">How to Play</h2>
 
         <ul className="list-disc pl-5 space-y-2 text-gray-700">
-          <li>Type in a word and press ENTER to submit your guess.</li>
+          <li>Type in a {wordLength} letter word and press ENTER to submit your guess.</li>
           <li>After making a guess, the letters will change colors to show how close your guess was to the secret word.</li>
         </ul>
 
@@ -44,7 +49,7 @@ function HowToPlayModal({ onClose }) {
         </div>
 
         <h3 className="text-xl font-bold mt-6 mb-2">Example</h3>
-        <div className="space-y-2">
+        {wordLength==5 && <div className="space-y-2">
           <div className="flex space-x-1">
             <ExampleLetter letter="P" color="black" />
             <ExampleLetter letter="R" color="green" />
@@ -66,7 +71,39 @@ function HowToPlayModal({ onClose }) {
             <ExampleLetter letter="N" color="green" />
             <ExampleLetter letter="K" color="green" />
           </div>
-        </div>
+        </div>}
+        {wordLength==4 && <div className="space-y-2">
+          <div className="flex space-x-1">
+            <ExampleLetter letter="R" color="yellow" />
+            <ExampleLetter letter="A" color="black" />
+            <ExampleLetter letter="I" color="black" />
+            <ExampleLetter letter="L" color="black" />
+          </div>
+          <div className="flex space-x-1">
+            <ExampleLetter letter="G" color="black" />
+            <ExampleLetter letter="R" color="yellow" />
+            <ExampleLetter letter="E" color="black" />
+            <ExampleLetter letter="Y" color="black" />
+          </div>
+          <div className="flex space-x-1">
+            <ExampleLetter letter="F" color="black" />
+            <ExampleLetter letter="O" color="green" />
+            <ExampleLetter letter="U" color="black" />
+            <ExampleLetter letter="R" color="yellow" />
+          </div>
+          <div className="flex space-x-1">
+            <ExampleLetter letter="C" color="black" />
+            <ExampleLetter letter="O" color="green" />
+            <ExampleLetter letter="R" color="green" />
+            <ExampleLetter letter="K" color="green" />
+          </div>
+          <div className="flex space-x-1">
+            <ExampleLetter letter="W" color="green" />
+            <ExampleLetter letter="O" color="green" />
+            <ExampleLetter letter="R" color="green" />
+            <ExampleLetter letter="K" color="green" />
+          </div>
+        </div>}
       </div>
     </div>
   );

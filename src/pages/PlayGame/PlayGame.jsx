@@ -1,18 +1,17 @@
-import { useLocation, useNavigate } from "react-router-dom";
+// import { useLocation, useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import Guess from "../../components/Guess/Guess";
 import KeyBoard from "../../components/KeyBoard/KeyBoard";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import WinModal from "../../components/WinModal/WinModal";
 import LossModal from "../../components/LossModal/LossModal";
 import HowToPlayModal from "../../components/HowToPlay/HowToPlay";
+import { GameContext } from "../../context/GameContext";
 
 function PlayGame() {
-  const location = useLocation();
-  const wordLength = location.state?.wordLength || 5;
-  let wordSelected = location.state?.wordSelected;
-  wordSelected = wordSelected.toUpperCase();
 
-  const navigate = useNavigate(); // 3. Initialize navigate
+  const { wordLength, selectedWord, setGameState, setWordLength, setSelectedWord } = useContext(GameContext)
+  let correctWord = selectedWord.toUpperCase();
 
   // State for the current, active guess being typed
   const [currentGuess, setCurrentGuess] = useState('');
@@ -21,17 +20,16 @@ function PlayGame() {
   const [submittedGuesses, setSubmittedGuesses] = useState([]);
 
   let [blackChars, setBlackChars] = useState('');
-
   const [guessGrid, setGuessGrid] = useState([false, false, false, false, false]);
   const [guessNo, setGuessNo] = useState(0);
-
   const [win, setWin] = useState(false);
   const [loss, setLoss] = useState(false);
-
-  const [showHelp, setShowHelp] = useState(false); // 2. Add state for the help modal
+  const [showHelp, setShowHelp] = useState(false);
 
   function handleRestart() {
-    navigate('/start');
+    setGameState('setup');
+    setWordLength(0);
+    setSelectedWord('');
   }
 
   function handleKeyPress(key) {
@@ -41,13 +39,11 @@ function PlayGame() {
     if (key === "ENTER") {
       // Only submit if the word is the correct length
       if (currentGuess.length === wordLength) {
-        console.log(guessGrid);
-        console.log(guessNo);
         setSubmittedGuesses([...submittedGuesses, currentGuess]); // Add the guess to our list
         setCurrentGuess(''); // Clear the current guess for the next line
         let blackCharsToAdd = '';
         for (let i = 0; i < wordLength; i++) {
-          if (!wordSelected.includes(currentGuess[i])) {
+          if (!correctWord.includes(currentGuess[i])) {
             blackCharsToAdd += currentGuess[i];
           };
         };
@@ -56,7 +52,7 @@ function PlayGame() {
         let newGuessGrid = [...guessGrid];
         newGuessGrid[guessNo] = true;
         setGuessGrid(newGuessGrid);
-        if (currentGuess === wordSelected) {
+        if (currentGuess === correctWord) {
           setTimeout(() => {
             setWin(true);
           }, 1000);
@@ -71,19 +67,14 @@ function PlayGame() {
     }
 
     if (key === "BACKSPACE") {
-      console.log("BACKSPACE clicked");
       setCurrentGuess(currentGuess.slice(0, -1)); // Remove the last letter
       return;
     }
-
     // Add the new letter if the current guess isn't full
     if (currentGuess.length < wordLength) {
       setCurrentGuess(currentGuess + key);
     }
   }
-
-  // Create an array for all 6 guess rows
-  // const guessGrid = Array(6).fill(null);
 
   return (
     <>
@@ -121,8 +112,8 @@ function PlayGame() {
         </div>
         <KeyBoard onKeyPress={handleKeyPress} blackChars={blackChars} />
       </div>
-      {win && <WinModal onRestart={handleRestart} word={wordSelected} />}
-      {loss && <LossModal onRestart={handleRestart} word={wordSelected} />}
+      {win && <WinModal onRestart={handleRestart} word={correctWord} />}
+      {loss && <LossModal onRestart={handleRestart} word={correctWord} />}
       {showHelp && <HowToPlayModal onClose={() => setShowHelp(false)} />}
     </>
   );

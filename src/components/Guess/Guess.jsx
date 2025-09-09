@@ -1,4 +1,5 @@
-import { useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { GameContext } from "../../context/GameContext";
 
 // A single styled letter box
 function Letter({ value, isBlackChar, isGreenChar, isYellowChar }) {
@@ -19,8 +20,7 @@ function Letter({ value, isBlackChar, isGreenChar, isYellowChar }) {
 // The main component to display a row of letters
 function Guess({ letters = [], wordLength = 5, filled, blackChars }) { // Default to 5 for safety
 
-  const location = useLocation();
-  let wordSelected = location.state?.wordSelected;
+  const { selectedWord } = useContext(GameContext)
 
   // Create an array with a fixed length, filled with the provided letters
   const displayLetters = new Array(wordLength)
@@ -30,7 +30,7 @@ function Guess({ letters = [], wordLength = 5, filled, blackChars }) { // Defaul
   return (
     <div className="flex justify-center my-1">
       {displayLetters.map((letter, index) => (
-        <Letter key={index} value={letter} isBlackChar={filled && blackChars.includes(letter)} isGreenChar={filled && wordSelected[index]===letter} isYellowChar={filled && wordSelected[index]!==letter} />
+        <Letter key={index} value={letter} isBlackChar={filled && blackChars.includes(letter)} isGreenChar={filled && selectedWord[index] === letter} isYellowChar={filled && selectedWord[index] !== letter} />
       ))}
     </div>
   );

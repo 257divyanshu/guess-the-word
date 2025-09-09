@@ -8,7 +8,7 @@ function TextInputForm({ handleFormSubmit, textInputType, handleTextInputChange,
 
             <div className="">
                 <TextInput
-                    inputPlaceHolder={'ENTER THE WORD'}
+                    inputPlaceHolder={'enter the word'}
                     inputType={textInputType}
                     inputOnChange={handleTextInputChange}
                     inputValue={value}
