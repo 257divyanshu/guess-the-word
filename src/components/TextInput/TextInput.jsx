@@ -12,6 +12,7 @@ function TextInput({inputPlaceHolder, inputType="text", inputValue, inputOnChang
                 type={inputType}
                 value={inputValue}
                 maxLength={wordLength}
+                autocomplete="one-time-code"
             />
     )
 }
