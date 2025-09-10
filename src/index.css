@@ -15,3 +15,7 @@
   border-radius: 6px; /* Rounded corners for the thumb */
   border: 2px solid #e5e7eb; /* Padding around the thumb */
 }
+
+body {
+  @apply select-none;
+}

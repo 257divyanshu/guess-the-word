@@ -1,3 +1,6 @@
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
+
 function LossModal({ onRestart, word }) {
   return (
     // Backdrop: a semi-transparent overlay for the whole screen
@@ -12,13 +15,21 @@ function LossModal({ onRestart, word }) {
         </h2>
 
         {/* 2. Word display updated with new phrase and smaller text */}
-        <div className="bg-gray-100 p-4 rounded-md mb-6">
+        <div className="bg-gray-100 p-4 rounded-md">
           <p className="text-xl font-bold tracking-wider text-gray-700">
             {/* {`It was  ${word}`} */}
             <span className="text-gray-700">It was </span>
             <span className="text-green-500">{word}</span>
           </p>
         </div>
+
+        <DotLottieReact
+          src="/loss.lottie"
+          loop
+          autoplay
+          // className='border border-black h-[120px]'
+          className='h-[120px]'
+        />
 
         <button
           onClick={onRestart}
