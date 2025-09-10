@@ -4,7 +4,12 @@ import Button from "../Button/Button";
 function TextInputForm({ handleFormSubmit, textInputType, handleTextInputChange, value, setTextInputType }) {
 
     return (
-        <form className="border-4 border-blue-500 mt-10 mx-auto flex flex-col gap-y-8 py-6 px-4 rounded-lg w-4/5 md:w-1/2 lg:w-1/3 bg-sky-100" onSubmit={handleFormSubmit}>
+        <form className="border-4 border-blue-500 mt-10 mx-auto flex flex-col gap-y-8 py-6 px-4 rounded-lg w-4/5 md:w-1/2 lg:w-1/3 bg-sky-100" onSubmit={handleFormSubmit}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                }
+            }}>
 
             <div className="">
                 <TextInput
