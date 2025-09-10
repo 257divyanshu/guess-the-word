@@ -6,8 +6,8 @@ import { useState } from 'react';
 import { GameContext } from './context/GameContext';
 
 function App() {
-  const [wordLength, setWordLength] = useState();
-  const [selectedWord, setSelectedWord] = useState('');
+  const [wordLength, setWordLength] = useState(false);
+  const [selectedWord, setSelectedWord] = useState(false);
   const [gameState, setGameState] = useState('setup');
   function handleWordLengthSubmission(wordLength) {
     setWordLength(wordLength);

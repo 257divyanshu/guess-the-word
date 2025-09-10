@@ -28,8 +28,8 @@ function PlayGame() {
 
   function handleRestart() {
     setGameState('setup');
-    setWordLength(0);
-    setSelectedWord('');
+    setWordLength(false);
+    setSelectedWord(false);
   }
 
   function handleKeyPress(key) {
