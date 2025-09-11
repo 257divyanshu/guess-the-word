@@ -4,7 +4,7 @@ const BackspaceIcon = () => (
         xmlns="http://www.w3.org/2000/svg"
         className="h-6 w-6"
         fill="none"
-        viewBox="0 0 24 24"
+        viewBox="0 0 26 26"
         stroke="currentColor"
         strokeWidth={2}
     >
@@ -16,24 +16,36 @@ const BackspaceIcon = () => (
     </svg>
 );
 
-
-function KeyBoard({onKeyPress, blackChars}) {
-    // the layout of the keyboard
+function KeyBoard({ onKeyPress, blackChars }) {
     const row1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
     const row2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
     const row3 = ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "BACKSPACE"];
 
     const renderKey = (key) => {
+
+        // Use flexbox classes for proportional width
+        let flexClass;
+        if (key === 'ENTER') {
+            flexClass = 'flex-[1.5]'; // Make ENTER 1.5x wider than a normal key
+        } else if (key === 'BACKSPACE') {
+            flexClass = 'flex-[1.25]'; // Make BACKSPACE 1.25x wider than a normal key
+        } else {
+            flexClass = 'flex-1'; // Normal keys take up 1 unit of space
+        }
+
         const isSpecialKey = key === "ENTER" || key === "BACKSPACE";
-        const keyWidth = isSpecialKey ? 'w-20' : 'w-10'; // special keys wider
         const isBlackChar = blackChars.includes(key);
+
+        // --- END OF CHANGES ---
 
         return (
             <button
                 key={key}
                 className={`
-          ${keyWidth} h-12 m-1 flex items-center justify-center rounded-md font-bold text-lg ${isSpecialKey ? 'bg-slate-400 hover:bg-slate-500 text-black text-[0.9rem]' : isBlackChar ? 'bg-black text-white' : 'bg-gray-200 hover:bg-gray-300 text-black'} transition-all
-        `}
+                    ${flexClass} h-12 m-1 flex items-center justify-center rounded-md font-bold text-lg 
+                    ${isSpecialKey ? 'bg-slate-400 hover:bg-slate-500 text-black text-xs' : isBlackChar ? 'bg-black text-white' : 'bg-gray-200 hover:bg-gray-300 text-black'} 
+                    transition-all
+                `}
                 onClick={(e) => {
                     onKeyPress(e.target.innerText || "BACKSPACE")
                 }}
@@ -44,19 +56,17 @@ function KeyBoard({onKeyPress, blackChars}) {
     };
 
     return (
-        // Main keyboard container
-        <div className="bg-slate-700 p-[7px] rounded-xl m-1 mt-6">
-            {/* First Row */}
-            <div className="flex justify-center">
-                {row1.map(key => renderKey(key))}
-            </div>
-            {/* Second Row */}
-            <div className="flex justify-center">
-                {row2.map(key => renderKey(key))}
-            </div>
-            {/* Third Row */}
-            <div className="flex justify-center">
-                {row3.map(key => renderKey(key))}
+        <div className="flex justify-center">
+            <div className="w-full max-w-lg bg-slate-700 p-2 rounded-xl">
+                <div className="flex justify-center">
+                    {row1.map(key => renderKey(key))}
+                </div>
+                <div className="flex justify-center">
+                    {row2.map(key => renderKey(key))}
+                </div>
+                <div className="flex justify-center">
+                    {row3.map(key => renderKey(key))}
+                </div>
             </div>
         </div>
     );

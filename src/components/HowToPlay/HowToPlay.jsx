@@ -26,7 +26,7 @@ function HowToPlayModal({ onClose }) {
         {/* Close Button */}
         <button onClick={onClose} className="absolute top-4 right-4 text-3xl text-gray-500 hover:text-gray-800">&times;</button>
 
-        <h2 className="text-2xl font-bold mb-4 text-center">How to Play</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">How to Guess</h2>
 
         <ul className="list-disc pl-5 space-y-2 text-gray-700">
           <li>Type in a {wordLength} letter word and press ENTER to submit your guess.</li>
