@@ -1,7 +1,9 @@
 import TextInput from "../TextInput/TextInput";
 import Button from "../Button/Button";
 
-function TextInputForm({ handleFormSubmit, textInputType, handleTextInputChange, value, setTextInputType }) {
+function TextInputForm({ handleFormSubmit, textInputType, handleTextInputChange, value, setTextInputType, textInputPlaceHolder, status }) {
+
+    const isBusy = status === 'validating' || status === 'success';
 
     return (
         <form className="mx-auto flex flex-col gap-y-8 py-10 px-8 rounded-lg shadow-lg w-4/5 md:w-1/2 lg:w-1/3 bg-white" onSubmit={handleFormSubmit}
@@ -13,7 +15,7 @@ function TextInputForm({ handleFormSubmit, textInputType, handleTextInputChange,
 
             <div className="">
                 <TextInput
-                    inputPlaceHolder={'enter the word'}
+                    inputPlaceHolder={textInputPlaceHolder}
                     inputType={textInputType}
                     inputOnChange={handleTextInputChange}
                     inputValue={value}
@@ -29,6 +31,7 @@ function TextInputForm({ handleFormSubmit, textInputType, handleTextInputChange,
                             setTextInputType(textInputType == "password" ? "text" : "password")
                         }}
                         btnType="button"
+                        btnDisabled={isBusy}
                     >
                     </Button>
                 </div>
@@ -37,6 +40,7 @@ function TextInputForm({ handleFormSubmit, textInputType, handleTextInputChange,
                     <Button
                         btnText="Play"
                         btnType="submit"
+                        btnDisabled={isBusy}
                     >
                     </Button>
                 </div>

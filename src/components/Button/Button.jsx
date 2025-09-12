@@ -1,4 +1,4 @@
-function Button({ btnText, btnType, btnOnClick, btnColor='blue'}) {
+function Button({ btnText, btnType, btnOnClick, btnDisabled, btnColor='blue'}) {
     function handleClick() {
         setTimeout(btnOnClick, 400);
     };
@@ -10,10 +10,11 @@ function Button({ btnText, btnType, btnOnClick, btnColor='blue'}) {
         <button
             className={`
         px-4 py-2 ${colorStyles[btnColor]} text-white font-bold rounded-md 
-        transition-all active:scale-95 w-full
+        transition-all active:scale-95 w-full disabled:opacity-50 disabled:cursor-not-allowed
       `}
             type={btnType}
             onClick={handleClick}
+            disabled={btnDisabled}
         >
             {btnText}
         </button>
