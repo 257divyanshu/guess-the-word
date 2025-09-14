@@ -1,6 +1,6 @@
 import './App.css'
-import PlayGame from './pages/PlayGame/PlayGame'
-import StartGame from './pages/StartGame/StartGame'
+import PlayGame from './components/PlayGame/PlayGame'
+import StartGame from './components/StartGame/StartGame'
 import Welcome from './components/Welcome/Welcome';
 import { useState } from 'react';
 import { GameContext } from './context/GameContext';

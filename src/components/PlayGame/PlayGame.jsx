@@ -1,9 +1,9 @@
-import Guess from "../../components/Guess/Guess";
-import KeyBoard from "../../components/KeyBoard/KeyBoard";
+import Guess from "../Guess/Guess";
+import KeyBoard from "../KeyBoard/KeyBoard";
 import { useContext, useState } from "react";
-import WinModal from "../../components/WinModal/WinModal";
-import LossModal from "../../components/LossModal/LossModal";
-import HowToPlayModal from "../../components/HowToPlay/HowToPlay";
+import WinModal from "../WinModal/WinModal";
+import LossModal from "../LossModal/LossModal";
+import HowToPlayModal from "../HowToPlay/HowToPlay";
 import { GameContext } from "../../context/GameContext";
 
 /**

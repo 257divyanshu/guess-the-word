@@ -1,6 +1,6 @@
-import TextInputFormContainer from "../../components/TextInputForm/TextInputFormContainer";
+import TextInputFormContainer from "../TextInputForm/TextInputFormContainer";
 import { useContext } from "react";
-import SelectWordLength from "../../components/SelectWordLength/SelectWordLength";
+import SelectWordLength from "../SelectWordLength/SelectWordLength";
 import { GameContext } from "../../context/GameContext";
 
 /**
