@@ -42,7 +42,6 @@ The project is organized with a clear and scalable structure.
 ├── src/
 │   ├── components/      # Reusable React components for UI elements
 │   ├── context/         # React Context for global state management (GameContext)
-│   ├── pages/           # Main application pages (StartGame, PlayGame)
 │   ├── services/        # API calls and external service logic (validateWord)
 │   ├── App.jsx          # Main application component and router setup
 │   └── main.jsx         # Entry point of the React application
