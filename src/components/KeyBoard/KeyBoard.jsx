@@ -1,4 +1,7 @@
-// SVG icon for the backspace key
+/**
+ * A functional component that renders an SVG icon for the backspace key.
+ * This is used within the KeyBoard component to provide a visual icon instead of text.
+ */
 const BackspaceIcon = () => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -16,14 +19,27 @@ const BackspaceIcon = () => (
     </svg>
 );
 
+/**
+ * A presentational component that renders the virtual keyboard for the game.
+ * It handles the layout and styling of keys and calls a parent function on key presses.
+ * @param {object} props - The component props.
+ * @param {function} props.onKeyPress - A callback function that is invoked when a key is clicked.
+ * @param {string} props.blackChars - A string containing letters that should be styled as incorrect (black).
+ */
 function KeyBoard({ onKeyPress, blackChars }) {
     const row1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
     const row2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
     const row3 = ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "BACKSPACE"];
 
+    /**
+     * A helper function to render a single, styled key button.
+     * This avoids repeating complex JSX inside the map functions.
+     * @param {string} key - The string value of the key to render (e.g., "A", "ENTER").
+     */
     const renderKey = (key) => {
 
-        // Use flexbox classes for proportional width
+        // Use flexbox classes to create variably sized keys for a realistic layout.
+        // Special keys like ENTER and BACKSPACE are made wider.
         let flexClass;
         if (key === 'ENTER') {
             flexClass = 'flex-[1.5]'; // Make ENTER 1.5x wider than a normal key
@@ -36,9 +52,8 @@ function KeyBoard({ onKeyPress, blackChars }) {
         const isSpecialKey = key === "ENTER" || key === "BACKSPACE";
         const isBlackChar = blackChars.includes(key);
 
-        // --- END OF CHANGES ---
-
         return (
+            
             <button
                 key={key}
                 className={`
@@ -46,18 +61,29 @@ function KeyBoard({ onKeyPress, blackChars }) {
                     ${isSpecialKey ? 'bg-slate-400 hover:bg-slate-500 text-black text-xs' : isBlackChar ? 'bg-black text-white' : 'bg-gray-200 hover:bg-gray-300 text-black'} 
                     transition-all
                 `}
-                onClick={(e) => {
-                    onKeyPress(e.target.innerText || "BACKSPACE")
+                onClick={() => {
+                    // When a key is clicked, call the onKeyPress prop.
+                    // If the key is BACKSPACE, its innerText will be empty (due to the SVG),
+                    // so we explicitly pass the string "BACKSPACE".
+                    onKeyPress(key)
                 }}
             >
+                {/* Render the BackspaceIcon component for the backspace key, otherwise render the key's text. */}
                 {key === "BACKSPACE" ? <BackspaceIcon /> : key}
             </button>
+
         );
+
     };
 
     return (
+
         <div className="flex justify-center">
+
+            {/* Main container for the keyboard with a styled background */}
             <div className="w-full max-w-lg bg-slate-700 p-2 rounded-xl">
+
+                {/* Map over each row array to render the keys */}
                 <div className="flex justify-center">
                     {row1.map(key => renderKey(key))}
                 </div>
@@ -67,9 +93,13 @@ function KeyBoard({ onKeyPress, blackChars }) {
                 <div className="flex justify-center">
                     {row3.map(key => renderKey(key))}
                 </div>
+
             </div>
+
         </div>
+
     );
+    
 }
 
 export default KeyBoard;
