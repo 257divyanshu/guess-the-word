@@ -68,5 +68,5 @@ The game is played in two phases: setting the word and guessing the word.
 2.  **Analyze Feedback:** After each guess, the tiles will change color:
     * 🟩 **Green:** The letter is correct and in the right position.
     * 🟨 **Yellow:** The letter is in the word but in the wrong position.
-    * ⬜ **Gray:** The letter is not in the word at all.
+    * ⬛ **Black:** The letter is not in the word at all.
 3.  **Win or Lose:** Use the clues to figure out the word before you run out of attempts. Good luck!
